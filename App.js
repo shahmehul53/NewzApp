@@ -1,13 +1,13 @@
 import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import FirstScreen from './src/screens/FirstScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import {Provider} from 'react-redux';
 import store from './src/store';
 import DetailsScreen from './src/screens/DetailsScreen';
 import TabScreen from './TabsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
+import ThemeSettingScreen from './src/screens/ThemeSettingScreen';
 
 const navigator = createStackNavigator({
   Home: {
@@ -18,7 +18,8 @@ const navigator = createStackNavigator({
   },
   Tab: TabScreen,
   Settings: SettingsScreen,
-  First: FirstScreen,
+  ThemesSetting: ThemeSettingScreen,
+
   Details: DetailsScreen,
 });
 

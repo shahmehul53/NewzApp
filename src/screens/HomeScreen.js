@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -16,87 +16,46 @@ import {loadData} from '../actions/dataActions';
 import Icon from 'react-native-vector-icons/Feather';
 import R from '../R';
 import Carousel from 'react-native-snap-carousel';
+import {DATA, days, months} from '../assets/Constants';
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'Technology',
-    headline:
-      "The PC enthusiast's resource. Power users and the tools they love, without computing religion.",
-    imgSource: R.images.TopFlower,
-    color: '#F96A36',
-    uri: R.images.Technology,
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Entertainment',
-    headline:
-      "The PC enthusiast's resource. Power users and the tools they love, without computing religion.",
-    imgSource: R.images.TopBusiness,
-    color: '#8E96FD',
-    uri: R.images.Entertainment,
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'General',
-    headline:
-      'The AP delivers in-depth coverage on the international, politics, lifestyle, business, and entertainment news.',
-    imgSource: R.images.TopFlower,
-    color: '#FDC06B',
-    uri: R.images.General,
-  },
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'Health',
-    headlines:
-      'Syndicated news and opinion website providing continuously updated headlines to top news and analysis sources.',
-    imgSource: R.images.TopJuice,
-    color: '#3FC98E',
-    uri: R.images.Health,
-  },
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'Science',
-    headline:
-      "The PC enthusiast's resource. Power users and the tools they love, without computing religion.",
-    imgSource: R.images.TopFlower,
-    color: '#F13379',
-    uri: R.images.Science,
-  },
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'Sports',
-    headlines: '1st Test: India favourites to make short work of Bangladesh',
-    color: '#EFBB91',
-    imgSource: R.images.TopJuice,
-    uri: R.images.Sports,
-  },
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'Business',
-    headline: '1st Test: India favourites to make short work of Bangladesh',
-    imgSource: R.images.TopBusiness,
-    color: '#28A4BA',
-    uri: R.images.Business,
-  },
-];
-
-const HomeScreen = ({datastore, isLoading, loadData, error, navigation}) => {
+const HomeScreen = ({
+  datastore,
+  isLoading,
+  loadData,
+  error,
+  navigation,
+  //theme,
+}) => {
+  const [date, setDate] = useState();
   useEffect(() => {
     loadData();
+    getCurrentDate();
   }, []);
 
   let defaultImage =
     'https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png';
 
+  const getCurrentDate = () => {
+    var date = new Date().getDate();
+    var day = new Date().getDay();
+    var month = new Date().getMonth();
+    var finalDate = '' + days[day] + '' + '\n' + months[month] + ' ' + date;
+    setDate(finalDate);
+  };
+  //const {backgroundColor, color} = theme;
   return (
-    // <SafeAreaView>
-    <View style={{flex: 1, marginLeft: 5, marginRight: 5, marginTop: 20}}>
+    <View
+      style={{
+        flex: 1,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 20,
+        // backgroundColor: backgroundColor,
+      }}>
       <ScrollView>
         <View style={{flexDirection: 'row'}}>
-          <View>
-            <Text>Sunday</Text>
-            <Text>September 22</Text>
+          <View style={{marginLeft: 5}}>
+            <Text style={{fontWeight: 'bold'}}>{date}</Text>
           </View>
           <View
             style={{
@@ -263,8 +222,10 @@ const HomeScreen = ({datastore, isLoading, loadData, error, navigation}) => {
   );
 };
 
-const mapStateToProps = ({data2}) => {
+const mapStateToProps = ({state, data2}) => {
   const {datastore, isLoading, error} = data2;
+  //const {theme} = state.theme1;
+  //console.log("adka;sdaksd", theme)
   return {datastore, isLoading, error};
 };
 
@@ -277,7 +238,7 @@ const styles = {
     flexDirection: 'row',
     borderRadius: 7,
     //backgroundColor: '#dfe4ea',
-    backgroundColor: '#EFBB91',
+    backgroundColor: '#F9C64E',
     padding: 5,
     margin: 5,
   },
