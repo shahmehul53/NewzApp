@@ -30,7 +30,7 @@ const TechnologyScreen = ({
           <ActivityIndicator />
         </View>
       ) : (
-        <View>
+        <>
           <FlatList
             style={{width: '100%'}}
             data={technology}
@@ -61,7 +61,7 @@ const TechnologyScreen = ({
               );
             }}
           />
-        </View>
+        </>
       )}
     </>
   );

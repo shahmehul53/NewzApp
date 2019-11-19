@@ -29,7 +29,7 @@ const GeneralScreen = ({
           <ActivityIndicator />
         </View>
       ) : (
-        <View>
+        <>
           <FlatList
             style={{width: '100%'}}
             data={general}
@@ -60,7 +60,7 @@ const GeneralScreen = ({
               );
             }}
           />
-        </View>
+        </>
       )}
     </>
   );

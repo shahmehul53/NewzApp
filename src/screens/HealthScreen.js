@@ -23,7 +23,7 @@ const HealthScreen = ({health, isLoading, error, loadCategory, navigation}) => {
           <ActivityIndicator />
         </View>
       ) : (
-        <View>
+        <>
           <FlatList
             style={{width: '100%'}}
             data={health}
@@ -54,7 +54,7 @@ const HealthScreen = ({health, isLoading, error, loadCategory, navigation}) => {
               );
             }}
           />
-        </View>
+        </>
       )}
     </>
   );

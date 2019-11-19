@@ -10,11 +10,9 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import {Card, Button, CardSection, Header} from '../components/common';
 import {connect} from 'react-redux';
 import {loadData} from '../actions/dataActions';
 import Icon from 'react-native-vector-icons/Feather';
-import R from '../R';
 import Carousel from 'react-native-snap-carousel';
 import {DATA, days, months} from '../assets/Constants';
 
@@ -24,7 +22,7 @@ const HomeScreen = ({
   loadData,
   error,
   navigation,
-  //theme,
+  theme,
 }) => {
   const [date, setDate] = useState();
   useEffect(() => {
@@ -42,7 +40,7 @@ const HomeScreen = ({
     var finalDate = '' + days[day] + '' + '\n' + months[month] + ' ' + date;
     setDate(finalDate);
   };
-  //const {backgroundColor, color} = theme;
+  const {backgroundColor, color} = theme;
   return (
     <View
       style={{
@@ -50,12 +48,12 @@ const HomeScreen = ({
         marginLeft: 5,
         marginRight: 5,
         marginTop: 20,
-        // backgroundColor: backgroundColor,
+        backgroundColor: backgroundColor,
       }}>
       <ScrollView>
         <View style={{flexDirection: 'row'}}>
           <View style={{marginLeft: 5}}>
-            <Text style={{fontWeight: 'bold'}}>{date}</Text>
+            <Text style={{fontWeight: 'bold', color: color}}>{date}</Text>
           </View>
           <View
             style={{
@@ -63,7 +61,11 @@ const HomeScreen = ({
               alignItems: 'flex-end',
             }}>
             <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-              <Icon name="settings" size={30} style={{marginRight: 10}} />
+              <Icon
+                name="settings"
+                size={30}
+                style={{marginRight: 10, color: color}}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -117,6 +119,7 @@ const HomeScreen = ({
             fontSize: 24,
             marginTop: 10,
             paddingLeft: 6,
+            color: color,
           }}>
           Top Categories
         </Text>
@@ -181,6 +184,7 @@ const HomeScreen = ({
                 fontSize: 24,
                 marginTop: 10,
                 paddingLeft: 6,
+                color: color,
               }}>
               Latest News
             </Text>
@@ -222,11 +226,11 @@ const HomeScreen = ({
   );
 };
 
-const mapStateToProps = ({state, data2}) => {
+const mapStateToProps = ({theme1, data2}) => {
   const {datastore, isLoading, error} = data2;
-  //const {theme} = state.theme1;
-  //console.log("adka;sdaksd", theme)
-  return {datastore, isLoading, error};
+  const {theme} = theme1;
+  console.log('adka;sdaksd', theme);
+  return {datastore, isLoading, error, theme};
 };
 
 const styles = {

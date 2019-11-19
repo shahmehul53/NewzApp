@@ -29,7 +29,7 @@ const EntertainmentScreen = ({
           <ActivityIndicator />
         </View>
       ) : (
-        <View>
+        <>
           <FlatList
             style={{width: '100%'}}
             data={entertainment}
@@ -60,7 +60,7 @@ const EntertainmentScreen = ({
               );
             }}
           />
-        </View>
+        </>
       )}
     </>
   );

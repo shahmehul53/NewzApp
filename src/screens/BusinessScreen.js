@@ -29,7 +29,7 @@ const BusinessScreen = ({
           <ActivityIndicator />
         </View>
       ) : (
-        <View>
+        <>
           <FlatList
             style={{width: '100%'}}
             data={business}
@@ -60,7 +60,7 @@ const BusinessScreen = ({
               );
             }}
           />
-        </View>
+        </>
       )}
     </>
   );

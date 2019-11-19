@@ -8,27 +8,44 @@ import DetailsScreen from './src/screens/DetailsScreen';
 import TabScreen from './TabsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import ThemeSettingScreen from './src/screens/ThemeSettingScreen';
+import {connect} from 'react-redux';
+import Root from './src/Root';
 
-const navigator = createStackNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: {
-      header: null,
-    },
-  },
-  Tab: TabScreen,
-  Settings: SettingsScreen,
-  ThemesSetting: ThemeSettingScreen,
+// const navigator = createStackNavigator(
+//   {
+//     Home: {
+//       screen: HomeScreen,
+//       navigationOptions: {
+//         header: null,
+//       },
+//     },
+//     Tab: TabScreen,
+//     Settings: SettingsScreen,
+//     ThemesSetting: ThemeSettingScreen,
 
-  Details: DetailsScreen,
-});
+//     Details: DetailsScreen,
+//   },
+//   {
+//     defaultNavigationOptions: ({screenProps}) => {
+//       let currentTheme = screenProps.theme;
+//       return {
+//         headerTintColor: currentTheme.color,
+//         headerStyle: {
+//           backgroundColor: currentTheme.backgroundColor,
+//         },
+//       };
+//     },
+//   },
+// );
 
-const App = createAppContainer(navigator);
+// const RootNavigator = createAppContainer(navigator);
 
-export default () => {
+const App = () => {
   return (
     <Provider store={store}>
-      <App />
+      <Root />
     </Provider>
   );
 };
+
+export default App;

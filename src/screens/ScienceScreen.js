@@ -30,7 +30,7 @@ const ScienceScreen = ({
           <ActivityIndicator />
         </View>
       ) : (
-        <View>
+        <>
           <FlatList
             style={{width: '100%'}}
             data={science}
@@ -61,7 +61,7 @@ const ScienceScreen = ({
               );
             }}
           />
-        </View>
+        </>
       )}
     </>
   );
