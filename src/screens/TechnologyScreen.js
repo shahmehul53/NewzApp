@@ -17,16 +17,24 @@ const TechnologyScreen = ({
   error,
   loadCategory,
   navigation,
+  theme,
 }) => {
   useEffect(() => {
     loadCategory('technology');
   }, []);
 
   console.log('************', technology);
+
   return (
     <>
       {isLoading ? (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            //backgroundColor: backgroundColor,
+          }}>
           <ActivityIndicator />
         </View>
       ) : (
@@ -67,8 +75,10 @@ const TechnologyScreen = ({
   );
 };
 
-const mapStateToProps = ({category}) => {
+const mapStateToProps = ({theme1, category}) => {
   const {technology, isLoading, error} = category;
+  const {theme} = theme1;
+  console.log('techtheme', theme);
   return {technology, isLoading, error};
 };
 

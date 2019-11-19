@@ -24,4 +24,9 @@ export const themeColor = {
     backgroundColor: '#c71585',
     color: '#f5fffa',
   },
+  white: {
+    key: 'MILKY WHITE',
+    backgroundColor: '#fff',
+    color: '#000',
+  },
 };

@@ -10,6 +10,7 @@ const tempList = [
   {...themeColor.green, obj: {...themeColor.green}},
   {...themeColor.yellow, obj: {...themeColor.yellow}},
   {...themeColor.violet, obj: {...themeColor.violet}},
+  {...themeColor.white, obj: {...themeColor.white}},
 ];
 
 const ThemeSettingScreen = ({theme, changeTheme}) => {
