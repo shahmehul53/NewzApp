@@ -17,19 +17,27 @@ const EntertainmentScreen = ({
   error,
   loadCategory,
   navigation,
+  theme,
 }) => {
   useEffect(() => {
     loadCategory('entertainment');
   }, []);
   console.log('****ent****0', entertainment);
+  const {backgroundColor, color} = theme;
   return (
     <>
       {isLoading ? (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <ActivityIndicator />
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: backgroundColor,
+          }}>
+          <ActivityIndicator size="large" color={color} />
         </View>
       ) : (
-        <>
+        <View style={{backgroundColor: backgroundColor}}>
           <FlatList
             style={{width: '100%'}}
             data={entertainment}
@@ -60,15 +68,16 @@ const EntertainmentScreen = ({
               );
             }}
           />
-        </>
+        </View>
       )}
     </>
   );
 };
 
-const mapStateToProps = ({category}) => {
+const mapStateToProps = ({theme1, category}) => {
   const {entertainment, isLoading, error} = category;
-  return {entertainment, isLoading, error};
+  const {theme} = theme1;
+  return {entertainment, isLoading, error, theme};
 };
 
 const styles = {

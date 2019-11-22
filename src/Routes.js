@@ -5,9 +5,16 @@ import TabScreen from '../TabsScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import ThemeSettingScreen from './screens/ThemeSettingScreen';
 import DetailsScreen from './screens/DetailsScreen';
+import LaunchScreen from './screens/LaunchScreen';
 
 const navigator = createStackNavigator(
   {
+    Launch: {
+      screen: LaunchScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
     Home: {
       screen: HomeScreen,
       navigationOptions: {

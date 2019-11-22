@@ -17,19 +17,27 @@ const BusinessScreen = ({
   error,
   loadCategory,
   navigation,
+  theme,
 }) => {
   useEffect(() => {
     loadCategory('business');
   }, []);
   console.log('****bus****0', business);
+  const {backgroundColor, color} = theme;
   return (
     <>
       {isLoading ? (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <ActivityIndicator />
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: backgroundColor,
+          }}>
+          <ActivityIndicator size="large" color={color} />
         </View>
       ) : (
-        <>
+        <View style={{backgroundColor: backgroundColor}}>
           <FlatList
             style={{width: '100%'}}
             data={business}
@@ -60,15 +68,16 @@ const BusinessScreen = ({
               );
             }}
           />
-        </>
+        </View>
       )}
     </>
   );
 };
 
-const mapStateToProps = ({category}) => {
+const mapStateToProps = ({theme1, category}) => {
   const {business, isLoading, error} = category;
-  return {business, isLoading, error};
+  const {theme} = theme1;
+  return {business, isLoading, error, theme};
 };
 
 const styles = {

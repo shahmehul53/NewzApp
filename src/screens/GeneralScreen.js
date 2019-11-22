@@ -17,19 +17,27 @@ const GeneralScreen = ({
   error,
   loadCategory,
   navigation,
+  theme,
 }) => {
   useEffect(() => {
     loadCategory('general');
   }, []);
   console.log('****gen****0', general);
+  const {backgroundColor, color} = theme;
   return (
     <>
       {isLoading ? (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <ActivityIndicator />
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: backgroundColor,
+          }}>
+          <ActivityIndicator size="large" color={color} />
         </View>
       ) : (
-        <>
+        <View style={{backgroundColor: backgroundColor}}>
           <FlatList
             style={{width: '100%'}}
             data={general}
@@ -60,15 +68,16 @@ const GeneralScreen = ({
               );
             }}
           />
-        </>
+        </View>
       )}
     </>
   );
 };
 
-const mapStateToProps = ({category}) => {
+const mapStateToProps = ({theme1, category}) => {
   const {general, isLoading, error} = category;
-  return {general, isLoading, error};
+  const {theme} = theme1;
+  return {general, isLoading, error, theme};
 };
 
 const styles = {

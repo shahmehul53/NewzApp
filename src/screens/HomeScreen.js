@@ -3,9 +3,9 @@ import {
   View,
   Text,
   FlatList,
-  ScrollView,
   ActivityIndicator,
   Dimensions,
+  StatusBar,
   Image,
   ImageBackground,
   TouchableOpacity,
@@ -41,17 +41,11 @@ const HomeScreen = ({
     setDate(finalDate);
   };
   const {backgroundColor, color} = theme;
-  return (
-    <View
-      style={{
-        flex: 1,
-        marginLeft: 5,
-        marginRight: 5,
-        marginTop: 20,
-        backgroundColor: backgroundColor,
-      }}>
-      <ScrollView>
-        <View style={{flexDirection: 'row'}}>
+
+  const renderComponent = () => {
+    return (
+      <View>
+        <View style={{flexDirection: 'row', marginTop: 8}}>
           <View style={{marginLeft: 5}}>
             <Text style={{fontWeight: 'bold', color: color}}>{date}</Text>
           </View>
@@ -126,7 +120,7 @@ const HomeScreen = ({
         <FlatList
           horizontal
           data={DATA}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={item => item.title.toString()}
           renderItem={({item}) => {
             return (
               <TouchableOpacity onPress={() => navigation.navigate(item.title)}>
@@ -171,57 +165,68 @@ const HomeScreen = ({
           }}
         />
 
-        {isLoading ? (
-          <View
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <ActivityIndicator />
-          </View>
-        ) : (
-          <View>
-            <Text
-              style={{
-                fontWeight: 'bold',
-                fontSize: 24,
-                marginTop: 10,
-                paddingLeft: 6,
-                color: color,
-              }}>
-              Latest News
-            </Text>
-
-            <FlatList
-              style={{width: '100%'}}
-              data={datastore}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({item}) => {
-                return (
-                  <TouchableOpacity
-                    onPress={() =>
-                      navigation.navigate('Details', {url1: item.url})
-                    }>
-                    <View style={styles.rowStyles}>
-                      <View style={styles.imgContainer}>
-                        <Image
-                          source={{
-                            uri:
-                              item.urlToImage === null
-                                ? defaultImage
-                                : item.urlToImage,
-                          }}
-                          style={styles.image}
-                        />
-                      </View>
-                      <View style={styles.rightSide}>
-                        <Text style={styles.headline}>{item.title}</Text>
-                      </View>
+        <>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 24,
+              marginTop: 10,
+              paddingLeft: 6,
+              color: color,
+            }}>
+            Latest News
+          </Text>
+        </>
+      </View>
+    );
+  };
+  return (
+    <View
+      style={{
+        flex: 1,
+        marginTop: 20,
+        backgroundColor: backgroundColor,
+      }}>
+      <StatusBar backgroundColor="blue" barStyle="light-content" />
+      {isLoading ? (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <ActivityIndicator size="large" color={color} />
+        </View>
+      ) : (
+        <>
+          <FlatList
+            style={{width: '100%'}}
+            data={datastore}
+            ListHeaderComponent={renderComponent()}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) => {
+              return (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('Details', {url1: item.url})
+                  }>
+                  <View style={styles.rowStyles}>
+                    <View style={styles.imgContainer}>
+                      <Image
+                        source={{
+                          uri:
+                            item.urlToImage === null
+                              ? defaultImage
+                              : item.urlToImage,
+                        }}
+                        style={styles.image}
+                      />
                     </View>
-                  </TouchableOpacity>
-                );
-              }}
-            />
-          </View>
-        )}
-      </ScrollView>
+                    <View style={styles.rightSide}>
+                      <Text style={styles.headline}>{item.title}</Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </>
+      )}
     </View>
   );
 };
@@ -241,7 +246,6 @@ const styles = {
   rowStyles: {
     flexDirection: 'row',
     borderRadius: 7,
-    //backgroundColor: '#dfe4ea',
     backgroundColor: '#F9C64E',
     padding: 5,
     margin: 5,

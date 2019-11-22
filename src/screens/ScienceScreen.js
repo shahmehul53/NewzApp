@@ -17,20 +17,22 @@ const ScienceScreen = ({
   error,
   loadCategory,
   navigation,
+  theme,
 }) => {
   useEffect(() => {
     loadCategory('science');
   }, []);
 
   console.log('******SC******', science);
+  const {backgroundColor, color} = theme;
   return (
     <>
       {isLoading ? (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <ActivityIndicator />
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',backgroundColor: backgroundColor,}}>
+          <ActivityIndicator size="large" color={color} />
         </View>
       ) : (
-        <>
+        <View style={{backgroundColor: backgroundColor}}>
           <FlatList
             style={{width: '100%'}}
             data={science}
@@ -61,15 +63,16 @@ const ScienceScreen = ({
               );
             }}
           />
-        </>
+        </View>
       )}
     </>
   );
 };
 
-const mapStateToProps = ({category}) => {
+const mapStateToProps = ({theme1, category}) => {
   const {science, isLoading, error} = category;
-  return {science, isLoading, error};
+  const {theme} = theme1;
+  return {science, isLoading, error, theme};
 };
 
 const styles = {

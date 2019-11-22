@@ -1,7 +1,7 @@
 import {themeColor} from '../assets/themes';
 
 const initialState = {
-  theme: {...themeColor.rose},
+  theme: {...themeColor.white},
 };
 
 export default themes = (state = initialState, action) => {

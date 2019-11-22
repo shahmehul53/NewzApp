@@ -11,19 +11,27 @@ import {
 import {connect} from 'react-redux';
 import {loadCategory} from '../actions/dataActions';
 
-const SportsScreen = ({sports, isLoading, error, loadCategory, navigation}) => {
+const SportsScreen = ({
+  sports,
+  isLoading,
+  error,
+  loadCategory,
+  navigation,
+  theme,
+}) => {
   useEffect(() => {
     loadCategory('sports');
   }, []);
   console.log('****sports****0', sports);
+  const {backgroundColor, color} = theme;
   return (
     <>
       {isLoading ? (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <ActivityIndicator />
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',backgroundColor: backgroundColor,}}>
+          <ActivityIndicator size="large" color={color} />
         </View>
       ) : (
-        <View>
+        <View style={{backgroundColor: backgroundColor}}>
           <FlatList
             style={{width: '100%'}}
             data={sports}
@@ -60,9 +68,10 @@ const SportsScreen = ({sports, isLoading, error, loadCategory, navigation}) => {
   );
 };
 
-const mapStateToProps = ({category}) => {
+const mapStateToProps = ({theme1, category}) => {
   const {sports, isLoading, error} = category;
-  return {sports, isLoading, error};
+  const {theme} = theme1;
+  return {sports, isLoading, error, theme};
 };
 
 const styles = {

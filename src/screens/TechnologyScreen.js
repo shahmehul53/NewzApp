@@ -24,6 +24,7 @@ const TechnologyScreen = ({
   }, []);
 
   console.log('************', technology);
+  const {backgroundColor, color} = theme;
 
   return (
     <>
@@ -33,12 +34,12 @@ const TechnologyScreen = ({
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            //backgroundColor: backgroundColor,
+            backgroundColor: backgroundColor,
           }}>
-          <ActivityIndicator />
+          <ActivityIndicator size="large" color={color} />
         </View>
       ) : (
-        <>
+        <View style={{backgroundColor: backgroundColor}}>
           <FlatList
             style={{width: '100%'}}
             data={technology}
@@ -69,7 +70,7 @@ const TechnologyScreen = ({
               );
             }}
           />
-        </>
+        </View>
       )}
     </>
   );
@@ -79,7 +80,7 @@ const mapStateToProps = ({theme1, category}) => {
   const {technology, isLoading, error} = category;
   const {theme} = theme1;
   console.log('techtheme', theme);
-  return {technology, isLoading, error};
+  return {technology, isLoading, error, theme};
 };
 
 const styles = {
